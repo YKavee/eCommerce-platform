@@ -1,19 +1,25 @@
-import { Route, Routes, Navigate } from "react-router-dom";
-import Main from "./components/Main";
-import Signup from "./components/Singup";
-import Login from "./components/Login";
+import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Home } from './Components/Home'
+import { Login } from './Components/Login'
+import { Signup } from './Components/Signup'
+import { NotFound } from './Components/NotFound'
+import { AddProducts } from './Components/AddProducts'
+import { Cart } from './Components/Cart'
 
-function App() {
-	const user = localStorage.getItem("token");
-
-	return (
-		<Routes>
-			{user && <Route path="/" exact element={<Main />} />}
-			<Route path="/signup" exact element={<Signup />} />
-			<Route path="/login" exact element={<Login />} />
-			<Route path="/" element={<Navigate replace to="/login" />} />
-		</Routes>
-	);
+export const App = () => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component = {Home}/>
+        <Route path="/signup" component={Signup}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/add-products" component={AddProducts}/>
+        <Route path="/cart" component={Cart}/>       
+        <Route component={NotFound}/>        
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
